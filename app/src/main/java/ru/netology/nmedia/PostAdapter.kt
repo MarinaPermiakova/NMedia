@@ -43,13 +43,10 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             text.text = post.content
-            textViewLikes.text = formatNumber(post.likes)
-            textViewShare.text = formatNumber(post.shares)
-            textViewViews.text = formatNumber(post.views)
-
-            imageViewLikes.setImageResource(
-                if (post.likedByMe) R.drawable.likes_liked else R.drawable.likes
-            )
+            share.text = formatNumber(post.shares)
+            view.text = formatNumber(post.views)
+            like.isChecked = post.likedByMe
+            like.text = "${post.likes}"
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -71,15 +68,15 @@ class PostViewHolder(
                 }.show()
             }
 
-            imageViewLikes.setOnClickListener {
+            like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
 
-            imageViewShare.setOnClickListener {
+            share.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
 
-            imageViewViews.setOnClickListener {
+            view.setOnClickListener {
                 onInteractionListener.onView(post)
             }
         }

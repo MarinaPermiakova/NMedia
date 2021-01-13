@@ -12,4 +12,9 @@
     <string name="new_post_text">New post</string>
     <string name="error_empty_content">Ошибка: пустое сообщение</string>
     <string name="cancel">Отменить редактирование</string>
+    <string name="description_post_like">post like</string>
+    <string name="description_post_share">post share</string>
+    <string name="description_post_view">post view</string>
+    <string name="description_post_save">post save</string>
+    <string name="chooser_share_post">Поделиться</string>
 </resources>

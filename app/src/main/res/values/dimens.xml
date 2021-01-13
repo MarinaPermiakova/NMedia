@@ -3,4 +3,5 @@
     <dimen name="_8">8dp</dimen>
     <dimen name="posts_avatar_size">45dp</dimen>
     <dimen name="common_spacing">8dp</dimen>
+    <dimen name="icon_button_min_size">48dp</dimen>
 </resources>
