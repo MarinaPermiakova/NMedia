@@ -11,19 +11,21 @@ private val empty = Post(
     likes = 0,
     shares = 0,
     views = 0,
-    published = ""
+    published = "",
+    videoUrl = ""
 )
 
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
-    val edited = MutableLiveData(empty)
+    private val edited = MutableLiveData(empty)
 
     val data = repository.getAll()
     fun likeById(id: Long) = repository.likeById(id)
     fun shared(id: Long) = repository.shared(id)
     fun viewed(id: Long) = repository.viewed(id)
     fun removeById(id: Long) = repository.removeById(id)
+    fun video () = repository.video()
 
     fun save() {
         edited.value?.let {

@@ -16,7 +16,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
         Post(
             id = 8,
@@ -26,7 +27,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = null
         ),
         Post(
             id = 7,
@@ -36,7 +38,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
         Post(
             id = 6,
@@ -46,7 +49,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = null
         ),
         Post(
             id = 5,
@@ -56,7 +60,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = null
         ),
         Post(
             id = 4,
@@ -66,7 +71,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = null
 
         ),
         Post(
@@ -77,7 +83,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = null
         ),
         Post(
             id = 2,
@@ -87,7 +94,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = "https://www.youtube.com/watch?v=22Iy_EENXEw&ab_channel=%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%91%D1%83%D1%80%D0%B3%D1%83%D1%87%D0%B5%D0%B2"
         ),
         Post(
             id = 1,
@@ -101,7 +109,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             views = 0,
-            shares = 0
+            shares = 0,
+            videoUrl = null
         )
     )
 
@@ -153,6 +162,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
         posts = posts.map {
             if (it.id != post.id) it else it.copy(content = post.content)
         }
+        data.value = posts
+    }
+
+    override fun video() {
         data.value = posts
     }
 }

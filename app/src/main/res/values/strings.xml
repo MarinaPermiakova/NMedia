@@ -17,4 +17,7 @@
     <string name="description_post_view">post view</string>
     <string name="description_post_save">post save</string>
     <string name="chooser_share_post">Поделиться</string>
+    <string name="add_post">Post add</string>
+    <string name="watch_video">Смотреть видео</string>
+    <string name="write_post">Напишите пост</string>
 </resources>

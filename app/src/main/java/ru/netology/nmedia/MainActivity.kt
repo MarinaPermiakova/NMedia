@@ -1,16 +1,18 @@
 package ru.netology.nmedia
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import ru.netology.nmedia.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private val newPostRequestCode = 1
+    private val editPostRequestCode = 1
+    private val viewModel: PostViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = PostAdapter(object : OnInteractionListener {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
+                val intent = Intent(this@MainActivity, EditPostActivity::class.java)
+                intent.putExtra("content", post.content)
+                intent.putExtra("author", post.author)
+                intent.putExtra("published", post.published)
+                startActivityForResult(intent, editPostRequestCode)
             }
 
             override fun onLike(post: Post) {
@@ -33,67 +40,56 @@ class MainActivity : AppCompatActivity() {
 
             override fun onShare(post: Post) {
                 viewModel.shared(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(shareIntent)
             }
 
             override fun onView(post: Post) {
                 viewModel.viewed(post.id)
             }
+
+            override fun onVideo(post: Post) {
+                post.videoUrl?.let { viewModel.video() }
+                if (!post.videoUrl.isNullOrEmpty()){
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
+                    startActivity(intent)
+                }
+            }
         })
 
-        val textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s != null) binding.group.visibility = View.VISIBLE
-            }
-        }
 
 
         binding.list.adapter = adapter
-        viewModel.data.observe(this) { posts ->
+        viewModel.data.observe(owner = this) { posts ->
             adapter.submitList(posts)
         }
 
-        viewModel.edited.observe(this) { post ->
-            if (post.id == 0L) {
-                binding.content.addTextChangedListener(textWatcher)
-                return@observe
-            }
-            with(binding.content) {
-                requestFocus()
-                setText(post.content)
-                binding.group.visibility = View.VISIBLE
-            }
+        binding.fab.setOnClickListener {
+            val intent = Intent(this@MainActivity, NewPostActivity::class.java)
+            startActivityForResult(intent, newPostRequestCode)
         }
+    }
 
-        binding.save.setOnClickListener {
-
-            with(binding.content) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        context.getString(R.string.error_empty_content),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            newPostRequestCode -> {
+                if (resultCode != Activity.RESULT_OK) {
+                    return
                 }
-                viewModel.changeContent(text.toString())
-                viewModel.save()
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-            }
-            binding.group.visibility = View.GONE
-        }
 
-        binding.cancel.setOnClickListener {
-
-            with(binding.content) {
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
+                data?.getStringExtra(Intent.EXTRA_TEXT)?.let {
+                    viewModel.changeContent(it)
+                    viewModel.save()
+                }
             }
-            binding.group.visibility = View.GONE
         }
     }
 }

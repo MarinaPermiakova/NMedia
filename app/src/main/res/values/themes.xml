@@ -17,4 +17,12 @@
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
+
+    <style name="Widget.AppTheme.ButtonVideo" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/ic_launcher_background</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
