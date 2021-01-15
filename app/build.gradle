@@ -45,9 +45,13 @@ dependencies {
     def appcompat_version = "1.2.0"
     def constraintlayout_version = "2.0.4"
     def recyclerview_version = "1.1.0"
+    def junit_version = "4.13.1"
+    def ext_junit_version = "1.1.2"
+    def espresso_core_version = "3.3.0"
     def activity_version = "1.1.0"
     def lifecycle_version = "2.2.0"
     def mdc_version = "1.2.1"
+    def gson_version = "2.8.6"
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -59,11 +63,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "com.google.android.material:material:$mdc_version"
+    implementation "com.google.code.gson:gson:$gson_version"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 }

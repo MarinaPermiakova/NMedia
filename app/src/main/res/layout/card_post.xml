@@ -85,7 +85,6 @@
             android:contentDescription="@string/watch_video"
             android:text="@string/watch_video"
             android:textAllCaps="false"
-            android:visibility="visible"
             app:icon="@drawable/ic_round_play_arrow_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
