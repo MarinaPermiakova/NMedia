@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditPostActivity">
+    tools:context=".EditPostFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,19 +46,19 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="72dp" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:autoLink="web"
-
-            android:inputType="textMultiLine"
             android:padding="@dimen/common_spacing"
+            android:autoLink="web"
             android:textSize="18sp"
+            android:inputType="textMultiLine"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header"
-            tools:text="@sample/posts.json/data/content"
-            android:autofillHints="" />
+            tools:text="@sample/posts.json/data/content" >
+        </com.google.android.material.textfield.TextInputEditText>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
