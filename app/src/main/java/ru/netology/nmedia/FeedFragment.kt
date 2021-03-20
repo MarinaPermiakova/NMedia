@@ -36,7 +36,6 @@ class FeedFragment : Fragment() {
                     .actionFeedFragmentToEditPostFragment(postAuthor = post.author, postContent = post.content)
                 findNavController().navigate(action)
                 viewModel.edit(post)
-
             }
 
             override fun onLike(post: Post) {
@@ -66,7 +65,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun onVideo(post: Post) {
-                post.videoUrl?.let { viewModel.video() }
+                post.videoUrl?.let { viewModel.video(it) }
                 if (!post.videoUrl.isNullOrEmpty()) {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
                     startActivity(intent)

@@ -1,6 +1,7 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.repository
 
 import androidx.lifecycle.LiveData
+import ru.netology.nmedia.Post
 
 interface PostRepository {
     fun getAll(): LiveData<List<Post>>
@@ -9,5 +10,5 @@ interface PostRepository {
     fun viewed(id: Long)
     fun removeById(id: Long)
     fun save(post: Post)
-    fun video ()
+    fun video (videoUrl: String)
 }

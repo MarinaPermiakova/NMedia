@@ -18,7 +18,6 @@ interface OnInteractionListener {
     fun onVideo(post: Post) {}
 }
 
-
 class PostAdapter(
     private val onInteractionListener: OnInteractionListener
 ) :
@@ -66,7 +65,6 @@ class PostViewHolder(
                                 onInteractionListener.onEdit(post)
                                 true
                             }
-
                             else -> false
                         }
                     }
