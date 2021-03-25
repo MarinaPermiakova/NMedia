@@ -65,10 +65,12 @@ class FeedFragment : Fragment() {
             }
 
             override fun onVideo(post: Post) {
-                post.videoUrl?.let { viewModel.video(it) }
+                post.videoUrl?.let { viewModel.video(post) }
                 if (!post.videoUrl.isNullOrEmpty()) {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
-                    startActivity(intent)
+                    val viewIntent =
+                        Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                    startActivity(viewIntent)
                 }
             }
         })
